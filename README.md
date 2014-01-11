@@ -4,10 +4,10 @@ ShFlickr
 Python script to easily synchronize a picture folder with a Flickr account
 
 
-Licence: MIT
-Author:  Julien CHAUMONT
-Contact: julienc91 [at] outlook.fr
-Version: 1.0.1 - 10/01/2014
+* Licence: MIT
+* Author:  Julien CHAUMONT
+* Contact: julienc91 [at] outlook.fr
+* Version: 1.0.1 - 10/01/2014
 
 
 Introduction
@@ -34,7 +34,7 @@ Requirements
 
 Unfortunately, you cannot use ShFlickr without an API Key, as Yahoo limits requests to its Flickr API up to 3600 per hour. Consequently, every user must have its own API key. But don't worry, it is totally free and easy to have! You just have to fill a form to request a non-commercial API key (2 minutes of your time max).
 
-*Note: * to install the Python Flickr API, you can use `apt-get install python-flickr-api` on Debian, or `yum install python-flickrapi` on Fedora. For other OS, refer to the official documentation of the API.
+Note: to install the Python Flickr API, you can use `apt-get install python-flickr-api` on Debian, or `yum install python-flickrapi` on Fedora. For other OS, refer to the official documentation of the API.
 
 
 Installation
@@ -55,7 +55,7 @@ Then you will have to edit the `config.py` file with your Flickr account informa
 You will also have to indicate informations about your picture folders:
 * `PICTURE_FOLDER_PATH`: absolute path to your picture folder root
 * `PICTURE_EXTENSIONS`: only files whose name ends with one of the element in the list will be synchronized (it is case sensitive)
-* `SUBFOLDERS_REGEXP`: a regular expression to select the subfolders you want to synchronize. If you don't know what a regular expression is, just let it as "r''".
+* `SUBFOLDERS_REGEXP`: a regular expression to select the subfolders you want to synchronize. If you don't know what a regular expression is, just let it as `r''`.
 
 
 Folder organization
@@ -75,4 +75,4 @@ Usage
 
 You just have to run the following command line to let ShFlickr do its job:
 `python main.py`
-To interrupt ShFlickr, use '^C' (the `ctrl` key of your keyboard along with the `C` key) or just close your shell. The synchronization will continue from where it stopped at its next launch (however, it will restart the uploading of the last picture from the beginning). 
+To interrupt ShFlickr, use `'^C'` (the `ctrl` key of your keyboard along with the `C` key) or just close your shell. The synchronization will continue from where it stopped at its next launch (however, it will restart the uploading of the last picture from the beginning). 
