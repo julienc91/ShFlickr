@@ -4,7 +4,7 @@
 __author__ = "Julien Chaumont"
 __copyright__ = "Copyright 2014, Julien Chaumont"
 __licence__ = "MIT"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __contact__ = "julienc91 [at] outlook.fr"
 
 
@@ -39,17 +39,21 @@ class ShFlickr:
     def synclist(self, folder=PICTURE_FOLDER_PATH):
 
         print "Getting the list of pictures to synchronize..."
-        subfolders = [lfile for lfile in os.listdir(folder)
+        subfolders = [lfile for lfile in os.listdir(unicode(folder))
                       if os.path.isdir(os.path.join(folder, lfile))
                       and re.match(SUBFOLDERS_REGEXP, lfile)]
         photosets = self.flickr.photosets_getList(user_id=USER_ID)
         photos_to_sync = {}
         photoset_ids = {}
         for subfolder in subfolders:
+            subfolder = subfolder.encode("UTF-8")
             # Check if the album already exists on Flickr
             photoset_id = None
             for photoset in photosets.find('photosets').findall('photoset'):
-                if photoset.find('title').text == subfolder:
+                photoset_title = photoset.find('title').text
+                if type(photoset_title) == unicode:
+                    photoset_title = photoset_title.encode("UTF-8")
+                if photoset_title == subfolder:
                     photoset_id = str(photoset.attrib['id'])
                     break
             photoset_ids[subfolder] = photoset_id
@@ -66,16 +70,20 @@ class ShFlickr:
     # @return The list of the pictures to synchronize.
     #    
     def synclist_subfolder(self, subfolder, photoset_id=None):
-        files = [lfile for lfile in os.listdir(subfolder)
+        files = [lfile for lfile in os.listdir(unicode(subfolder))
                  if lfile.endswith(PICTURE_EXTENSIONS)]
         files_to_sync = []
         if photoset_id is not None:
             # Find which file were not uploaded
             photoset = list(self.flickr.walk_set(photoset_id))
             for lfile in files:
+                lfile = lfile.encode("UTF-8")
                 found = False
                 for photo in photoset:
-                    if photo.get('title') == lfile:
+                    photo = photo.get('title')
+                    if type(photo) == unicode:
+                        photo = photo.encode("UTF-8")
+                    if photo == lfile:
                         found = True
                         break
                 if not found:

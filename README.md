@@ -7,7 +7,7 @@ Python script to easily synchronize a picture folder with a Flickr account
 * Licence: MIT
 * Author:  Julien CHAUMONT
 * Contact: julienc91 [at] outlook.fr
-* Version: 1.0.1 - 10/01/2014
+* Version: 1.0.2 - 10/01/2014
 
 
 Introduction
@@ -75,4 +75,11 @@ Usage
 
 You just have to run the following command line to let ShFlickr do its job:
 `python main.py`
-To interrupt ShFlickr, use `'^C'` (the `ctrl` key of your keyboard along with the `C` key) or just close your shell. The synchronization will continue from where it stopped at its next launch (however, it will restart the uploading of the last picture from the beginning). 
+To interrupt ShFlickr, use `^C` (the `ctrl` key of your keyboard along with the `C` key) or just close your shell. The synchronization will continue from where it stopped at its next launch (however, it will restart the uploading of the last picture from the beginning). 
+
+
+Changelog
+---------
+
+* v1.0.2: fixed issues with special chars in file and folder names
+* v1.0.1: first version, synchronizes pictures by albums to a Flickr account
