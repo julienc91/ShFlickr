@@ -128,8 +128,6 @@ class ShFlickr:
                         print "Exit by user request"
                         return
                     except:
-                        import traceback
-                        print traceback.format_exc()
                         nb_errors += 1
                         consecutive_errors += 1
                         if consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
