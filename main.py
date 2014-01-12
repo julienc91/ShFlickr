@@ -22,7 +22,7 @@ class ShFlickr:
     #
     def __init__(self):
         self.flickr = flickrapi.FlickrAPI(API_KEY, API_SECRET)
-        (token, frob) = self.flickr.get_token_part_one(perms='write')
+        (token, frob) = self.flickr.get_token_part_one(perms='delete')
         if not token:
             raw_input("Press ENTER after you authorized this program")
         self.flickr.get_token_part_two((token, frob))
@@ -117,7 +117,9 @@ class ShFlickr:
                 done = False
                 while nb_errors < MAX_RETRIES and not done:
                     try:
-                        response = self.flickr.upload(filename=os.path.join(folder, subfolder, photo),
+                        path = os.path.join(folder, subfolder, photo).encode("UTF-8")
+                        photo = photo.encode("UTF-8")
+                        response = self.flickr.upload(filename=path,
                                                       title=photo,
                                                       is_public=VISIBLE_PUBLIC,
                                                       is_family=VISIBLE_FAMILY,
@@ -126,6 +128,8 @@ class ShFlickr:
                         print "Exit by user request"
                         return
                     except:
+                        import traceback
+                        print traceback.format_exc()
                         nb_errors += 1
                         consecutive_errors += 1
                         if consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
